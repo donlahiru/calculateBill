@@ -31,7 +31,7 @@ class BillController extends Controller
                 'units'
             ));
         } catch (\Exception $e) {
-            return back()->withError($e->getMessage())->withInput();
+            return back()->withErrors($e->getMessage())->withInput();
         }
     }
 }
