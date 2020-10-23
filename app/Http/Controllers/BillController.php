@@ -16,18 +16,22 @@ class BillController extends Controller
 
     public function calculateBill(BillService $billService)
     {
-        $validator = $billService->validator($this->_request->all());
+        try {
+            $validator = $billService->validator($this->_request->all());
 
-        if ($validator->fails()) {
-            return Redirect::to('/')->withErrors($validator);
-        } else {
-            $units = $this->_request['numberOfUnits'];
-            $finalAmount = $billService->calculateFinalAmount($units);
+            if ($validator->fails()) {
+                return Redirect::to('/')->withErrors($validator);
+            } else {
+                $units = $this->_request['numberOfUnits'];
+                $finalAmount = $billService->calculateFinalAmount($units);
+            }
+
+            return View::make('bill', compact(
+                'finalAmount',
+                'units'
+            ));
+        } catch (\Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
         }
-
-        return View::make('bill', compact(
-            'finalAmount',
-            'units'
-        ));
     }
 }
