@@ -41,6 +41,7 @@ vendor/bin/phpunit
 Main view file is resources/views/bill.blade.php
 Controller file is app/Http/Controllers/BillController.php
 Logic and validation file is  app/Services/BillService.php
+Unit test file is tests/Feature/BillTest.php
 ```
 The calculate conditions are in config/constants.php . If you want to change the conditions you can do it in this file by editing below code lines.
 
